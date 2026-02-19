@@ -59,30 +59,33 @@ class Node:
         self._data = node_data 
         self._next = None 
 
-    def get_data(self):
+    @property 
+    def data(self):
         """Get node data""" 
         return self._data 
 
-    def set_data(self, node_data):
+    @data.setter
+    def data(self, node_data):
         """Set node data""" 
         if type(node_data) in [type({}), type(()), type([])]:
             raise ValueError("data should not be a data structure")
         self._data = node_data 
 
-    data = property(get_data, set_data)
-
-    def get_next(self):
+    @property
+    def next(self):
         """Get next node""" 
         return self._next 
 
-    def set_next(self, node_next):
-        """Set next node""" 
+    @next.setter 
+    def next(self, node_next):
+        """Set next node"""
+        # should write test to make sure "node_next" is a node 
+        if type(node_next) != type(self):
+            raise ValueError("next should be another Node!")
         self._next = node_next 
-    
-    next = property(get_next, set_next)
 
     def __str__(self):
         return str(self._data)
 
     def __repr__(self):
-        return f"Node with value: {self._data}"
+        return f"Node with value: {self._data}" 
